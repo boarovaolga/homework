@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 @pytest.fixture
 def browser():
     driver = webdriver.Edge()
@@ -11,9 +12,12 @@ def browser():
     yield driver
     driver.quit()
 
+
 def test_zip_code(browser):
+
     driver = browser
-    driver.get("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
+    driver.get(
+        "https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
 
     driver.find_element(By.NAME, "first-name").send_keys("Иван")
     driver.find_element(By.NAME, "last-name").send_keys("Петров")
@@ -34,7 +38,7 @@ def test_zip_code(browser):
     wait.until(EC.presence_of_element_located((By.ID, "zip-code")))
 
     zip_code_element = driver.find_element(By.ID, "zip-code")
-    assert "alert-danger" in zip_code_element.get_attribute("class"),\
+    assert "alert-danger" in zip_code_element.get_attribute("class"), \
         "Поле Zip code не подсвечено красным"
     assert zip_code_element.text == "N/A", \
         f"Ожидалось 'N/A' для Zip code, получено '{zip_code_element.text}'"
@@ -55,6 +59,7 @@ def test_zip_code(browser):
         assert "alert-success" in element.get_attribute("class"), \
             f"Поле {element_id} не подсвечено зелёным"
         assert element.text == expected_value, \
-            f"Поле {element_id}: ожидалось '{expected_value}', получено '{element.text}'"
+            (f"Поле {element_id}: ожидалось '{expected_value}', "
+             f"получено '{element.text}'")
 
     print("Проверки прошли успешно")

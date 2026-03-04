@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 @pytest.fixture
 def browser():
     driver = webdriver.Chrome()
@@ -11,9 +12,11 @@ def browser():
     yield driver
     driver.quit()
 
+
 def test_slow_calculator(browser):
     driver = browser
-    driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
+    driver.get(
+        "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
 
     delay_input = driver.find_element(By.CSS_SELECTOR, "#delay")
     delay_input.clear()
@@ -25,7 +28,7 @@ def test_slow_calculator(browser):
     driver.find_element(By.XPATH, "//span[text()='=']").click()
 
     wait = WebDriverWait(driver, 50)
-    result_element = wait.until(
+    wait.until(
         EC.text_to_be_present_in_element((By.CLASS_NAME, "screen"), "15")
     )
     actual_result = driver.find_element(By.CLASS_NAME, "screen").text
