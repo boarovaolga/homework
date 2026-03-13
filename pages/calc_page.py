@@ -43,3 +43,8 @@ class CalcPage:
                 By.CLASS_NAME, "screen"), expected_result)
         )
         return self.get_result()
+
+    # Ожидание результата и его  проверка
+    def verify_result_is(self, expected, timeout=50):
+        actual = self.wait_for_result(expected, timeout)
+        assert actual == expected, f"Ожидалось {expected}, получено {actual}"

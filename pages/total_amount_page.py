@@ -15,3 +15,9 @@ class TotalAmountPage:
                 By.CLASS_NAME, "summary_total_label"))
         )
         return total_element.text
+
+    # Ожидание результата и его проверка
+    def verify_total_is(self, expected):
+        actual = self.get_total_text()
+        assert actual == expected, (f"Ожидаемая сумма '"
+                                    f"{expected}', получена '{actual}'")

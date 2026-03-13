@@ -43,9 +43,6 @@ def test_shop_page(driver):
 
     # Получение итоговой суммы
     total_amount_page = TotalAmountPage(driver)
-    total_text = total_amount_page.get_total_text()
-
-    assert total_text == "Total: $58.29", \
-        f"Ожидаемая сумма 'Total: $58.29', получена '{total_text}'"
+    total_amount_page.verify_total_is("Total: $58.29")
 
     print("Тест успешно пройден")

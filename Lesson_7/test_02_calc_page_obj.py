@@ -22,9 +22,6 @@ def test_calc_page(driver):
     calc_page.click_button("8")
     calc_page.click_button("=")
 
-    # Ожидание результата
-    actual_result = calc_page.wait_for_result("15", timeout=50)
-
-    assert actual_result == "15", f"Ожидалось 15, получено {actual_result}"
+    calc_page.verify_result_is("15", timeout=50)
 
     print("Тест пройден успешно")
