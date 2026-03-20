@@ -1,6 +1,7 @@
 from api_client import ApiClient
 from project_api import ProjectApi
 
+
 class TestGetProject:
     def test_get_existing_project(self, project_api):
         create_resp, title = project_api.create_unique_project("GetTest")
@@ -8,10 +9,11 @@ class TestGetProject:
         project_id = create_resp.json()['id']
 
         response = project_api.get_project(project_id)
-        project_api.assert_project_retrieved(response, expected_id=project_id, expected_title=title)
+        (project_api.assert_project_retrieved
+         (response, expected_id=project_id, expected_title=title))
 
     # Негативные проверки
-    # Передаём в URL идентификатор в неверном формате
+    # передаём в URL идентификатор в неверном формате
     def test_get_project_invalid_id(self, project_api):
         response = project_api.get_project("123")
         assert response.status_code in (400, 404)

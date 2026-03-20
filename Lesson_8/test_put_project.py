@@ -1,6 +1,7 @@
 class TestPutProject:
     def test_update_project_title(self, project_api):
-        create_resp, original_title = project_api.create_unique_project("Original")
+        create_resp, original_title = (
+            project_api.create_unique_project("Original"))
         project_api.assert_project_created(create_resp)
         project_id = create_resp.json()['id']
 
@@ -9,8 +10,8 @@ class TestPutProject:
         assert update_resp.status_code in (200, 204)
 
         get_resp = project_api.get_project(project_id)
-        project_api.assert_project_retrieved(get_resp,
-                                             expected_id=project_id, expected_title=new_title)
+        (project_api.assert_project_retrieved
+         (get_resp, expected_id=project_id, expected_title=new_title))
 
     # Негативные проверки
     # обновить проект с несуществующим идентификатором
